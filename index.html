@@ -6,218 +6,211 @@
   <title>Mobile Legends - Info Game</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4ff; color: #1a1a2e; }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #0a0e1a; color: #e0e0e0; }
 
     /* NAVBAR */
     nav {
-      background-color: #1565c0;
-      padding: 16px 40px;
+      background: linear-gradient(90deg, #0d1b3e, #1565c0);
+      padding: 14px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
-    nav .logo { color: white; font-size: 22px; font-weight: bold; letter-spacing: 1px; }
-    nav ul { list-style: none; display: flex; gap: 24px; }
-    nav ul li a { color: white; text-decoration: none; font-size: 15px; transition: opacity 0.2s; }
-    nav ul li a:hover { opacity: 0.75; }
+    nav .logo { color: #f9c74f; font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 24px; flex-wrap: wrap; }
+    nav ul li a { color: white; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    nav ul li a:hover { color: #f9c74f; }
 
-    /* HERO SECTION */
-    .hero {
-      background: linear-gradient(135deg, #1565c0, #1e88e5);
+    /* HERO BANNER */
+    .hero-banner {
+      background: linear-gradient(135deg, #0d1b3e 0%, #1565c0 50%, #0d1b3e 100%);
       color: white;
       text-align: center;
-      padding: 80px 20px;
+      padding: 90px 20px;
+      position: relative;
+      overflow: hidden;
     }
-    .hero h1 { font-size: 42px; margin-bottom: 16px; }
-    .hero p { font-size: 18px; max-width: 600px; margin: 0 auto 28px; opacity: 0.9; }
-    .hero a {
-      background-color: white;
-      color: #1565c0;
-      padding: 12px 32px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://i.imgur.com/8JLXZ9b.png') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .hero-banner h1 { font-size: 44px; margin-bottom: 16px; color: #f9c74f; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .hero-banner p { font-size: 18px; max-width: 600px; margin: 0 auto 28px; opacity: 0.9; }
+    .hero-banner a {
+      background: #f9c74f; color: #0d1b3e;
+      padding: 12px 36px; border-radius: 6px;
+      text-decoration: none; font-weight: bold; font-size: 16px;
       transition: background 0.2s;
     }
-    .hero a:hover { background-color: #e3f2fd; }
+    .hero-banner a:hover { background: #ffe082; }
 
-    /* SECTION TITLE */
+    /* SECTION */
+    .section { padding: 60px 40px; }
+    .section-dark { background-color: #0d1422; }
+    .section-light { background-color: #111827; }
     .section-title {
-      text-align: center;
-      font-size: 28px;
-      color: #1565c0;
-      margin-bottom: 36px;
+      text-align: center; font-size: 30px;
+      color: #f9c74f; margin-bottom: 10px;
+    }
+    .section-sub {
+      text-align: center; color: #aaa;
+      font-size: 15px; margin-bottom: 36px;
     }
 
-    /* TENTANG GAME */
-    .about { padding: 60px 40px; max-width: 900px; margin: 0 auto; text-align: center; }
-    .about p { font-size: 16px; line-height: 1.8; color: #444; }
-
-    /* ROLE HERO */
-    .roles { background-color: white; padding: 60px 40px; }
+    /* ROLE CARDS */
     .role-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
+      gap: 20px; max-width: 1000px; margin: 0 auto;
     }
     .role-card {
-      background-color: #e3f2fd;
-      border: 2px solid #90caf9;
-      border-radius: 10px;
-      padding: 24px 16px;
-      text-align: center;
-      transition: transform 0.2s;
+      border-radius: 12px; padding: 24px 16px;
+      text-align: center; transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .role-card:hover { transform: translateY(-4px); }
-    .role-card .icon { font-size: 36px; margin-bottom: 10px; }
-    .role-card h3 { font-size: 16px; color: #1565c0; margin-bottom: 6px; }
-    .role-card p { font-size: 13px; color: #555; }
+    .role-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .role-card .icon { font-size: 40px; margin-bottom: 12px; }
+    .role-card h3 { font-size: 16px; color: #f9c74f; margin-bottom: 6px; }
+    .role-card p { font-size: 13px; color: #bbb; line-height: 1.5; }
+    .rc-assassin { background: linear-gradient(135deg, #3a0000, #7b1111); }
+    .rc-tank     { background: linear-gradient(135deg, #001a3a, #0d47a1); }
+    .rc-marksman { background: linear-gradient(135deg, #2a1500, #bf360c); }
+    .rc-mage     { background: linear-gradient(135deg, #1a0033, #6a1b9a); }
+    .rc-support  { background: linear-gradient(135deg, #002200, #1b5e20); }
+    .rc-fighter  { background: linear-gradient(135deg, #1a1200, #f57f17); }
 
-    /* HERO LIST */
-    .hero-list { padding: 60px 40px; background-color: #f0f4ff; }
+    /* HERO FILTER */
     .hero-filter {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
+      display: flex; justify-content: center;
+      gap: 10px; flex-wrap: wrap; margin-bottom: 30px;
     }
     .hero-filter button {
       padding: 8px 20px;
-      border: 2px solid #1565c0;
+      border: 2px solid #f9c74f;
       border-radius: 20px;
-      background: white;
-      color: #1565c0;
-      font-size: 14px;
-      cursor: pointer;
+      background: transparent;
+      color: #f9c74f;
+      font-size: 14px; cursor: pointer;
       transition: all 0.2s;
     }
-    .hero-filter button:hover,
-    .hero-filter button.active {
-      background: #1565c0;
-      color: white;
+    .hero-filter button:hover, .hero-filter button.active {
+      background: #f9c74f; color: #0d1b3e; font-weight: bold;
     }
+
+    /* HERO GRID */
     .hero-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 20px; max-width: 1100px; margin: 0 auto;
     }
     .hero-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      background: #1a2236;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
       transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
+      border: 1px solid rgba(255,255,255,0.07);
     }
-    .hero-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-    .hero-card .hero-avatar {
-      width: 100%;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
+    .hero-card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(0,0,0,0.6); }
+    .hero-card img {
+      width: 100%; height: 160px;
+      object-fit: cover; object-position: top;
+      display: block;
     }
     .hero-card .hero-info { padding: 12px; }
-    .hero-card .hero-info h3 { font-size: 15px; color: #1a1a2e; margin-bottom: 4px; }
-    .hero-card .hero-info .role-badge {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: bold;
-      color: white;
+    .hero-card .hero-info h3 { font-size: 15px; color: white; margin-bottom: 5px; }
+    .role-badge {
+      display: inline-block; padding: 2px 10px;
+      border-radius: 12px; font-size: 11px;
+      font-weight: bold; color: white;
     }
-    .badge-assassin { background-color: #c62828; }
-    .badge-tank { background-color: #1565c0; }
-    .badge-marksman { background-color: #e65100; }
-    .badge-mage { background-color: #6a1b9a; }
-    .badge-support { background-color: #2e7d32; }
-    .badge-fighter { background-color: #f57f17; }
+    .badge-assassin { background: #c62828; }
+    .badge-tank     { background: #1565c0; }
+    .badge-marksman { background: #e65100; }
+    .badge-mage     { background: #6a1b9a; }
+    .badge-support  { background: #2e7d32; }
+    .badge-fighter  { background: #f57f17; }
+
+    /* KOMPONEN */
+    .komponen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .komponen-card {
+      background: #1a2236;
+      border-radius: 14px; padding: 24px;
+      border: 1px solid rgba(249,199,79,0.2);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .komponen-card:hover { transform: translateY(-4px); border-color: #f9c74f; }
+    .komponen-card .k-icon { font-size: 38px; margin-bottom: 12px; }
+    .komponen-card h3 { font-size: 17px; color: #f9c74f; margin-bottom: 8px; }
+    .komponen-card p { font-size: 14px; color: #bbb; line-height: 1.6; }
 
     /* PETA */
-    .map-section { background-color: white; padding: 60px 40px; }
-    .map-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .map-wrapper { max-width: 900px; margin: 0 auto; }
     .map-visual {
-      background: linear-gradient(135deg, #1b5e20, #2e7d32);
-      border-radius: 16px;
-      padding: 30px;
-      position: relative;
-      min-height: 420px;
+      background: linear-gradient(135deg, #0a2e0a, #1b5e20);
+      border-radius: 16px; padding: 24px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 30px;
-      border: 3px solid #1565c0;
+      grid-template-rows: repeat(3, 120px);
+      gap: 10px; margin-bottom: 30px;
+      border: 2px solid #f9c74f;
     }
     .map-zone {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.07);
       border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      text-align: center;
-      color: white;
-      font-size: 13px;
-      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 10px; text-align: center;
+      color: white; border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.2s;
     }
-    .map-zone .zone-icon { font-size: 28px; margin-bottom: 6px; }
-    .map-zone .zone-name { font-weight: bold; font-size: 13px; }
-    .map-zone .zone-desc { font-size: 11px; opacity: 0.85; margin-top: 3px; }
-    .map-zone.base-blue { background: rgba(21, 101, 192, 0.5); border-color: #90caf9; }
-    .map-zone.base-red { background: rgba(198, 40, 40, 0.5); border-color: #ef9a9a; }
-    .map-zone.center { background: rgba(255,255,255,0.15); }
+    .map-zone:hover { background: rgba(255,255,255,0.15); }
+    .map-zone .zone-icon { font-size: 26px; margin-bottom: 5px; }
+    .map-zone .zone-name { font-weight: bold; font-size: 13px; color: #f9c74f; }
+    .map-zone .zone-desc { font-size: 11px; opacity: 0.8; margin-top: 3px; }
+    .base-blue { background: rgba(21,101,192,0.45); border-color: #90caf9; }
+    .base-red  { background: rgba(198,40,40,0.45);  border-color: #ef9a9a; }
+
     .map-legend {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
     }
     .legend-item {
-      background: #f0f4ff;
-      border-left: 4px solid #1565c0;
-      border-radius: 6px;
-      padding: 12px 16px;
+      background: #1a2236;
+      border-left: 4px solid #f9c74f;
+      border-radius: 8px; padding: 14px 16px;
     }
-    .legend-item h4 { font-size: 14px; color: #1565c0; margin-bottom: 4px; }
-    .legend-item p { font-size: 13px; color: #555; }
+    .legend-item h4 { font-size: 14px; color: #f9c74f; margin-bottom: 4px; }
+    .legend-item p  { font-size: 13px; color: #bbb; }
 
     /* TIPS */
-    .tips { padding: 60px 40px; max-width: 900px; margin: 0 auto; }
-    .tips ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .tips ul li {
-      background: white;
-      border-left: 4px solid #1565c0;
-      padding: 14px 20px;
-      border-radius: 6px;
-      font-size: 15px;
-      color: #333;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
+    .tips-list li {
+      background: #1a2236;
+      border-left: 4px solid #f9c74f;
+      padding: 14px 20px; border-radius: 8px;
+      font-size: 15px; color: #ddd;
     }
-    .tips ul li::before { content: "✔ "; color: #1565c0; font-weight: bold; }
+    .tips-list li::before { content: "✔ "; color: #f9c74f; font-weight: bold; }
 
     /* FOOTER */
     footer {
-      background-color: #1565c0;
-      color: white;
-      text-align: center;
-      padding: 24px;
-      font-size: 14px;
+      background: linear-gradient(90deg, #0d1b3e, #1565c0);
+      color: white; text-align: center;
+      padding: 28px; font-size: 14px;
     }
+    footer span { color: #f9c74f; }
   </style>
 </head>
 <body>
@@ -226,272 +219,298 @@
   <nav>
     <div class="logo">⚔️ Mobile Legends</div>
     <ul>
-      <li><a href="#about">Tentang</a></li>
       <li><a href="#roles">Role</a></li>
       <li><a href="#heroes">Hero</a></li>
+      <li><a href="#komponen">Komponen</a></li>
       <li><a href="#map">Peta</a></li>
       <li><a href="#tips">Tips</a></li>
     </ul>
   </nav>
 
   <!-- HERO BANNER -->
-  <section class="hero">
-    <h1>Selamat Datang di Dunia Mobile Legends</h1>
+  <section class="hero-banner">
+    <h1>⚔️ Mobile Legends: Bang Bang</h1>
     <p>Game MOBA mobile terpopuler di Asia Tenggara. Pilih hero-mu, bentuk tim, dan raih kemenangan!</p>
-    <a href="#about">Pelajari Lebih Lanjut</a>
+    <a href="#heroes">Lihat Hero</a>
   </section>
 
-  <!-- TENTANG GAME -->
-  <section class="about" id="about">
-    <h2 class="section-title">Tentang Mobile Legends: Bang Bang</h2>
-    <p>
-      Mobile Legends: Bang Bang (MLBB) adalah game MOBA (Multiplayer Online Battle Arena) yang dikembangkan oleh Moonton.
-      Dua tim beranggotakan 5 pemain saling berhadapan untuk menghancurkan base lawan.
-      Tersedia ratusan hero dengan kemampuan unik yang bisa kamu kuasai.
-    </p>
-  </section>
-
-  <!-- ROLE HERO -->
-  <section class="roles" id="roles">
+  <!-- ROLE -->
+  <section class="section section-dark" id="roles">
     <h2 class="section-title">Role Hero</h2>
+    <p class="section-sub">Setiap hero memiliki role yang menentukan fungsinya dalam tim</p>
     <div class="role-grid">
-      <div class="role-card">
+      <div class="role-card rc-assassin">
         <div class="icon">🗡️</div>
         <h3>Assassin</h3>
-        <p>Damage tinggi, cocok untuk membunuh musuh dengan cepat.</p>
+        <p>Damage burst tinggi, membunuh musuh dengan cepat. Lemah jika kena CC.</p>
       </div>
-      <div class="role-card">
+      <div class="role-card rc-tank">
         <div class="icon">🛡️</div>
         <h3>Tank</h3>
-        <p>HP besar, bertugas melindungi tim di garis depan.</p>
+        <p>HP & armor besar, pelindung tim di garis depan. Initiator teamfight.</p>
       </div>
-      <div class="role-card">
+      <div class="role-card rc-marksman">
         <div class="icon">🏹</div>
         <h3>Marksman</h3>
-        <p>Damage fisik dari jarak jauh, andalan di late game.</p>
+        <p>Damage fisik jarak jauh, andalan di late game. Butuh perlindungan.</p>
       </div>
-      <div class="role-card">
+      <div class="role-card rc-mage">
         <div class="icon">🔮</div>
         <h3>Mage</h3>
-        <p>Damage magic tinggi dengan skill area yang mematikan.</p>
+        <p>Damage magic tinggi dengan skill area. Kuat di early & mid game.</p>
       </div>
-      <div class="role-card">
+      <div class="role-card rc-support">
         <div class="icon">💚</div>
         <h3>Support</h3>
-        <p>Mendukung tim dengan heal dan buff yang berguna.</p>
+        <p>Heal, buff, dan protect tim. Kunci kemenangan di teamfight.</p>
       </div>
-      <div class="role-card">
+      <div class="role-card rc-fighter">
         <div class="icon">⚡</div>
         <h3>Fighter</h3>
-        <p>Seimbang antara damage dan ketahanan, fleksibel di lane.</p>
+        <p>Seimbang antara damage dan ketahanan. Fleksibel di semua lane.</p>
       </div>
     </div>
   </section>
 
-  <!-- DAFTAR HERO -->
-  <section class="hero-list" id="heroes">
+  <!-- HERO LIST -->
+  <section class="section section-light" id="heroes">
     <h2 class="section-title">Hero Mobile Legends</h2>
+    <p class="section-sub">Klik filter untuk melihat hero berdasarkan role</p>
     <div class="hero-filter">
-      <button class="active" onclick="filterHero('all', this)">Semua</button>
-      <button onclick="filterHero('assassin', this)">Assassin</button>
-      <button onclick="filterHero('tank', this)">Tank</button>
-      <button onclick="filterHero('marksman', this)">Marksman</button>
-      <button onclick="filterHero('mage', this)">Mage</button>
-      <button onclick="filterHero('support', this)">Support</button>
-      <button onclick="filterHero('fighter', this)">Fighter</button>
+      <button class="active" onclick="filterHero('all',this)">Semua</button>
+      <button onclick="filterHero('assassin',this)">Assassin</button>
+      <button onclick="filterHero('tank',this)">Tank</button>
+      <button onclick="filterHero('marksman',this)">Marksman</button>
+      <button onclick="filterHero('mage',this)">Mage</button>
+      <button onclick="filterHero('support',this)">Support</button>
+      <button onclick="filterHero('fighter',this)">Fighter</button>
     </div>
     <div class="hero-grid" id="heroGrid">
 
       <!-- ASSASSIN -->
       <div class="hero-card" data-role="assassin">
-        <div class="hero-avatar" style="background:#ffebee;">🥷</div>
-        <div class="hero-info">
-          <h3>Lancelot</h3>
-          <span class="role-badge badge-assassin">Assassin</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/5/5e/Lancelot_Portrait.png" alt="Lancelot" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Lancelot'">
+        <div class="hero-info"><h3>Lancelot</h3><span class="role-badge badge-assassin">Assassin</span></div>
       </div>
       <div class="hero-card" data-role="assassin">
-        <div class="hero-avatar" style="background:#ffebee;">🐍</div>
-        <div class="hero-info">
-          <h3>Natalia</h3>
-          <span class="role-badge badge-assassin">Assassin</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/4/4e/Hayabusa_Portrait.png" alt="Hayabusa" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Hayabusa'">
+        <div class="hero-info"><h3>Hayabusa</h3><span class="role-badge badge-assassin">Assassin</span></div>
       </div>
       <div class="hero-card" data-role="assassin">
-        <div class="hero-avatar" style="background:#ffebee;">🦂</div>
-        <div class="hero-info">
-          <h3>Selena</h3>
-          <span class="role-badge badge-assassin">Assassin</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/9/9e/Natalia_Portrait.png" alt="Natalia" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Natalia'">
+        <div class="hero-info"><h3>Natalia</h3><span class="role-badge badge-assassin">Assassin</span></div>
       </div>
       <div class="hero-card" data-role="assassin">
-        <div class="hero-avatar" style="background:#ffebee;">🌙</div>
-        <div class="hero-info">
-          <h3>Hayabusa</h3>
-          <span class="role-badge badge-assassin">Assassin</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/b5/Selena_Portrait.png" alt="Selena" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Selena'">
+        <div class="hero-info"><h3>Selena</h3><span class="role-badge badge-assassin">Assassin</span></div>
+      </div>
+      <div class="hero-card" data-role="assassin">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/2/2e/Ling_Portrait.png" alt="Ling" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Ling'">
+        <div class="hero-info"><h3>Ling</h3><span class="role-badge badge-assassin">Assassin</span></div>
+      </div>
+      <div class="hero-card" data-role="assassin">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/6/6e/Gusion_Portrait.png" alt="Gusion" onerror="this.src='https://placehold.co/160x160/3a0000/white?text=Gusion'">
+        <div class="hero-info"><h3>Gusion</h3><span class="role-badge badge-assassin">Assassin</span></div>
       </div>
 
       <!-- TANK -->
       <div class="hero-card" data-role="tank">
-        <div class="hero-avatar" style="background:#e3f2fd;">🐢</div>
-        <div class="hero-info">
-          <h3>Tigreal</h3>
-          <span class="role-badge badge-tank">Tank</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/e/e5/Tigreal_Portrait.png" alt="Tigreal" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Tigreal'">
+        <div class="hero-info"><h3>Tigreal</h3><span class="role-badge badge-tank">Tank</span></div>
       </div>
       <div class="hero-card" data-role="tank">
-        <div class="hero-avatar" style="background:#e3f2fd;">🦁</div>
-        <div class="hero-info">
-          <h3>Khufra</h3>
-          <span class="role-badge badge-tank">Tank</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/3/3e/Khufra_Portrait.png" alt="Khufra" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Khufra'">
+        <div class="hero-info"><h3>Khufra</h3><span class="role-badge badge-tank">Tank</span></div>
       </div>
       <div class="hero-card" data-role="tank">
-        <div class="hero-avatar" style="background:#e3f2fd;">🪨</div>
-        <div class="hero-info">
-          <h3>Grock</h3>
-          <span class="role-badge badge-tank">Tank</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/a/ae/Atlas_Portrait.png" alt="Atlas" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Atlas'">
+        <div class="hero-info"><h3>Atlas</h3><span class="role-badge badge-tank">Tank</span></div>
       </div>
       <div class="hero-card" data-role="tank">
-        <div class="hero-avatar" style="background:#e3f2fd;">🐉</div>
-        <div class="hero-info">
-          <h3>Atlas</h3>
-          <span class="role-badge badge-tank">Tank</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f5/Grock_Portrait.png" alt="Grock" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Grock'">
+        <div class="hero-info"><h3>Grock</h3><span class="role-badge badge-tank">Tank</span></div>
+      </div>
+      <div class="hero-card" data-role="tank">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/1/1e/Franco_Portrait.png" alt="Franco" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Franco'">
+        <div class="hero-info"><h3>Franco</h3><span class="role-badge badge-tank">Tank</span></div>
+      </div>
+      <div class="hero-card" data-role="tank">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/c/c5/Johnson_Portrait.png" alt="Johnson" onerror="this.src='https://placehold.co/160x160/001a3a/white?text=Johnson'">
+        <div class="hero-info"><h3>Johnson</h3><span class="role-badge badge-tank">Tank</span></div>
       </div>
 
       <!-- MARKSMAN -->
       <div class="hero-card" data-role="marksman">
-        <div class="hero-avatar" style="background:#fff3e0;">🏹</div>
-        <div class="hero-info">
-          <h3>Miya</h3>
-          <span class="role-badge badge-marksman">Marksman</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/8/8e/Miya_Portrait.png" alt="Miya" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Miya'">
+        <div class="hero-info"><h3>Miya</h3><span class="role-badge badge-marksman">Marksman</span></div>
       </div>
       <div class="hero-card" data-role="marksman">
-        <div class="hero-avatar" style="background:#fff3e0;">🔫</div>
-        <div class="hero-info">
-          <h3>Lesley</h3>
-          <span class="role-badge badge-marksman">Marksman</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/7/7e/Lesley_Portrait.png" alt="Lesley" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Lesley'">
+        <div class="hero-info"><h3>Lesley</h3><span class="role-badge badge-marksman">Marksman</span></div>
       </div>
       <div class="hero-card" data-role="marksman">
-        <div class="hero-avatar" style="background:#fff3e0;">⚡</div>
-        <div class="hero-info">
-          <h3>Brody</h3>
-          <span class="role-badge badge-marksman">Marksman</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/d/de/Brody_Portrait.png" alt="Brody" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Brody'">
+        <div class="hero-info"><h3>Brody</h3><span class="role-badge badge-marksman">Marksman</span></div>
       </div>
       <div class="hero-card" data-role="marksman">
-        <div class="hero-avatar" style="background:#fff3e0;">🎯</div>
-        <div class="hero-info">
-          <h3>Beatrix</h3>
-          <span class="role-badge badge-marksman">Marksman</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/4/4b/Beatrix_Portrait.png" alt="Beatrix" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Beatrix'">
+        <div class="hero-info"><h3>Beatrix</h3><span class="role-badge badge-marksman">Marksman</span></div>
+      </div>
+      <div class="hero-card" data-role="marksman">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/2/2b/Granger_Portrait.png" alt="Granger" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Granger'">
+        <div class="hero-info"><h3>Granger</h3><span class="role-badge badge-marksman">Marksman</span></div>
+      </div>
+      <div class="hero-card" data-role="marksman">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/e/e2/Claude_Portrait.png" alt="Claude" onerror="this.src='https://placehold.co/160x160/2a1500/white?text=Claude'">
+        <div class="hero-info"><h3>Claude</h3><span class="role-badge badge-marksman">Marksman</span></div>
       </div>
 
       <!-- MAGE -->
       <div class="hero-card" data-role="mage">
-        <div class="hero-avatar" style="background:#f3e5f5;">🔮</div>
-        <div class="hero-info">
-          <h3>Kagura</h3>
-          <span class="role-badge badge-mage">Mage</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/6/6b/Kagura_Portrait.png" alt="Kagura" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Kagura'">
+        <div class="hero-info"><h3>Kagura</h3><span class="role-badge badge-mage">Mage</span></div>
       </div>
       <div class="hero-card" data-role="mage">
-        <div class="hero-avatar" style="background:#f3e5f5;">❄️</div>
-        <div class="hero-info">
-          <h3>Eudora</h3>
-          <span class="role-badge badge-mage">Mage</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/5/5b/Lunox_Portrait.png" alt="Lunox" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Lunox'">
+        <div class="hero-info"><h3>Lunox</h3><span class="role-badge badge-mage">Mage</span></div>
       </div>
       <div class="hero-card" data-role="mage">
-        <div class="hero-avatar" style="background:#f3e5f5;">🌊</div>
-        <div class="hero-info">
-          <h3>Pharsa</h3>
-          <span class="role-badge badge-mage">Mage</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/9/9b/Pharsa_Portrait.png" alt="Pharsa" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Pharsa'">
+        <div class="hero-info"><h3>Pharsa</h3><span class="role-badge badge-mage">Mage</span></div>
       </div>
       <div class="hero-card" data-role="mage">
-        <div class="hero-avatar" style="background:#f3e5f5;">🌸</div>
-        <div class="hero-info">
-          <h3>Lunox</h3>
-          <span class="role-badge badge-mage">Mage</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/3/3b/Eudora_Portrait.png" alt="Eudora" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Eudora'">
+        <div class="hero-info"><h3>Eudora</h3><span class="role-badge badge-mage">Mage</span></div>
+      </div>
+      <div class="hero-card" data-role="mage">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/1/1b/Vale_Portrait.png" alt="Vale" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Vale'">
+        <div class="hero-info"><h3>Vale</h3><span class="role-badge badge-mage">Mage</span></div>
+      </div>
+      <div class="hero-card" data-role="mage">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/7/7b/Cecilion_Portrait.png" alt="Cecilion" onerror="this.src='https://placehold.co/160x160/1a0033/white?text=Cecilion'">
+        <div class="hero-info"><h3>Cecilion</h3><span class="role-badge badge-mage">Mage</span></div>
       </div>
 
       <!-- SUPPORT -->
       <div class="hero-card" data-role="support">
-        <div class="hero-avatar" style="background:#e8f5e9;">💚</div>
-        <div class="hero-info">
-          <h3>Estes</h3>
-          <span class="role-badge badge-support">Support</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/2/2e/Estes_Portrait.png" alt="Estes" onerror="this.src='https://placehold.co/160x160/002200/white?text=Estes'">
+        <div class="hero-info"><h3>Estes</h3><span class="role-badge badge-support">Support</span></div>
       </div>
       <div class="hero-card" data-role="support">
-        <div class="hero-avatar" style="background:#e8f5e9;">🌟</div>
-        <div class="hero-info">
-          <h3>Angela</h3>
-          <span class="role-badge badge-support">Support</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/a/ae/Angela_Portrait.png" alt="Angela" onerror="this.src='https://placehold.co/160x160/002200/white?text=Angela'">
+        <div class="hero-info"><h3>Angela</h3><span class="role-badge badge-support">Support</span></div>
       </div>
       <div class="hero-card" data-role="support">
-        <div class="hero-avatar" style="background:#e8f5e9;">🦋</div>
-        <div class="hero-info">
-          <h3>Rafaela</h3>
-          <span class="role-badge badge-support">Support</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f2/Rafaela_Portrait.png" alt="Rafaela" onerror="this.src='https://placehold.co/160x160/002200/white?text=Rafaela'">
+        <div class="hero-info"><h3>Rafaela</h3><span class="role-badge badge-support">Support</span></div>
       </div>
       <div class="hero-card" data-role="support">
-        <div class="hero-avatar" style="background:#e8f5e9;">🎵</div>
-        <div class="hero-info">
-          <h3>Mathilda</h3>
-          <span class="role-badge badge-support">Support</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/5/5e/Mathilda_Portrait.png" alt="Mathilda" onerror="this.src='https://placehold.co/160x160/002200/white?text=Mathilda'">
+        <div class="hero-info"><h3>Mathilda</h3><span class="role-badge badge-support">Support</span></div>
       </div>
 
       <!-- FIGHTER -->
       <div class="hero-card" data-role="fighter">
-        <div class="hero-avatar" style="background:#fffde7;">⚔️</div>
-        <div class="hero-info">
-          <h3>Aldous</h3>
-          <span class="role-badge badge-fighter">Fighter</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/c/c2/Chou_Portrait.png" alt="Chou" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Chou'">
+        <div class="hero-info"><h3>Chou</h3><span class="role-badge badge-fighter">Fighter</span></div>
       </div>
       <div class="hero-card" data-role="fighter">
-        <div class="hero-avatar" style="background:#fffde7;">🔥</div>
-        <div class="hero-info">
-          <h3>Chou</h3>
-          <span class="role-badge badge-fighter">Fighter</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/1/1e/Aldous_Portrait.png" alt="Aldous" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Aldous'">
+        <div class="hero-info"><h3>Aldous</h3><span class="role-badge badge-fighter">Fighter</span></div>
       </div>
       <div class="hero-card" data-role="fighter">
-        <div class="hero-avatar" style="background:#fffde7;">🐺</div>
-        <div class="hero-info">
-          <h3>Zilong</h3>
-          <span class="role-badge badge-fighter">Fighter</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/8/8b/Paquito_Portrait.png" alt="Paquito" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Paquito'">
+        <div class="hero-info"><h3>Paquito</h3><span class="role-badge badge-fighter">Fighter</span></div>
       </div>
       <div class="hero-card" data-role="fighter">
-        <div class="hero-avatar" style="background:#fffde7;">🌪️</div>
-        <div class="hero-info">
-          <h3>Paquito</h3>
-          <span class="role-badge badge-fighter">Fighter</span>
-        </div>
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/9/9e/Zilong_Portrait.png" alt="Zilong" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Zilong'">
+        <div class="hero-info"><h3>Zilong</h3><span class="role-badge badge-fighter">Fighter</span></div>
       </div>
+      <div class="hero-card" data-role="fighter">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/6/6e/Yu_Zhong_Portrait.png" alt="Yu Zhong" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Yu+Zhong'">
+        <div class="hero-info"><h3>Yu Zhong</h3><span class="role-badge badge-fighter">Fighter</span></div>
+      </div>
+      <div class="hero-card" data-role="fighter">
+        <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/b2/Esmeralda_Portrait.png" alt="Esmeralda" onerror="this.src='https://placehold.co/160x160/1a1200/white?text=Esmeralda'">
+        <div class="hero-info"><h3>Esmeralda</h3><span class="role-badge badge-fighter">Fighter</span></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- KOMPONEN MOBILE LEGENDS -->
+  <section class="section section-dark" id="komponen">
+    <h2 class="section-title">Komponen Mobile Legends</h2>
+    <p class="section-sub">Pahami elemen-elemen penting dalam permainan</p>
+    <div class="komponen-grid">
+      <div class="komponen-card">
+        <div class="k-icon">🏰</div>
+        <h3>Turret (Menara)</h3>
+        <p>Setiap lane punya 3 turret per tim. Turret menyerang musuh yang masuk jangkauannya. Hancurkan turret musuh untuk membuka jalan ke base.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🏯</div>
+        <h3>Base</h3>
+        <p>Markas utama tim. Di dalamnya terdapat Crystal yang harus dilindungi. Jika Crystal hancur, tim kalah. Base juga tempat respawn hero.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🐢</div>
+        <h3>Turtle (Penyu)</h3>
+        <p>Monster di river yang muncul tiap 2 menit. Membunuhnya memberi gold dan EXP bonus untuk seluruh tim. Prioritas di early game.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">👹</div>
+        <h3>Lord</h3>
+        <p>Boss kuat yang muncul setelah menit ke-8. Tim yang membunuhnya mendapat minion raksasa yang menyerang base musuh secara otomatis.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">💎</div>
+        <h3>Blue Buff</h3>
+        <p>Buff dari monster jungle biru. Mengurangi cooldown skill dan menambah regen mana. Sangat berguna untuk Mage dan Jungler.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🔴</div>
+        <h3>Red Buff</h3>
+        <p>Buff dari monster jungle merah. Menambah damage dan efek slow pada serangan basic. Cocok untuk Marksman dan Assassin.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🪙</div>
+        <h3>Gold & Item</h3>
+        <p>Gold didapat dari membunuh minion, monster, dan hero musuh. Digunakan untuk membeli item yang memperkuat hero di toko.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">⭐</div>
+        <h3>EXP & Level</h3>
+        <p>EXP didapat dari membunuh minion dan monster. Semakin tinggi level, semakin kuat hero dan skill yang tersedia.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🗺️</div>
+        <h3>Minimap</h3>
+        <p>Peta kecil di pojok layar yang menampilkan posisi tim dan musuh. Selalu perhatikan minimap untuk menghindari gank dan rotasi.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🧙</div>
+        <h3>Minion</h3>
+        <p>Unit kecil yang muncul otomatis dari base tiap 30 detik dan berjalan di lane. Membunuh minion adalah cara utama farming gold.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">🌿</div>
+        <h3>Bush (Semak)</h3>
+        <p>Area semak yang menyembunyikan hero di dalamnya dari pandangan musuh. Sering digunakan untuk ambush dan menghindari kejaran.</p>
+      </div>
+      <div class="komponen-card">
+        <div class="k-icon">💀</div>
+        <h3>Respawn</h3>
+        <p>Setelah hero mati, ada waktu tunggu sebelum bisa kembali bermain. Semakin tinggi level, semakin lama waktu respawn-nya.</p>
+      </div>
     </div>
   </section>
 
   <!-- PETA -->
-  <section class="map-section" id="map">
+  <section class="section section-light" id="map">
     <h2 class="section-title">Peta Mobile Legends</h2>
-    <div class="map-container">
+    <p class="section-sub">Land of Dawn — arena pertempuran 5v5</p>
+    <div class="map-wrapper">
       <div class="map-visual">
-
-        <!-- Row 1 -->
         <div class="map-zone base-red">
           <div class="zone-icon">🔴</div>
           <div class="zone-name">Base Merah</div>
@@ -500,84 +519,60 @@
         <div class="map-zone">
           <div class="zone-icon">⬆️</div>
           <div class="zone-name">Top Lane</div>
-          <div class="zone-desc">Jalur atas, biasa untuk Tank/Fighter</div>
+          <div class="zone-desc">Tank / Fighter</div>
         </div>
         <div class="map-zone">
           <div class="zone-icon">🌲</div>
-          <div class="zone-name">Hutan Atas</div>
-          <div class="zone-desc">Area jungle tim merah</div>
+          <div class="zone-name">Jungle Atas</div>
+          <div class="zone-desc">Area farm jungler</div>
         </div>
-
-        <!-- Row 2 -->
         <div class="map-zone">
-          <div class="zone-icon">🌲</div>
-          <div class="zone-name">Hutan Bawah</div>
-          <div class="zone-desc">Area jungle tim biru</div>
+          <div class="zone-icon">👹</div>
+          <div class="zone-name">Lord</div>
+          <div class="zone-desc">Spawn menit ke-8</div>
         </div>
         <div class="map-zone center">
           <div class="zone-icon">🏰</div>
           <div class="zone-name">Mid Lane</div>
-          <div class="zone-desc">Jalur tengah, biasa untuk Mage</div>
+          <div class="zone-desc">Mage / Assassin</div>
         </div>
-        <div class="map-zone">
-          <div class="zone-icon">🌲</div>
-          <div class="zone-name">Hutan Atas</div>
-          <div class="zone-desc">Lokasi Lord & Turtle</div>
-        </div>
-
-        <!-- Row 3 -->
         <div class="map-zone">
           <div class="zone-icon">🐢</div>
           <div class="zone-name">Turtle</div>
-          <div class="zone-desc">Spawn 2 menit, beri gold & exp</div>
+          <div class="zone-desc">Spawn tiap 2 menit</div>
+        </div>
+        <div class="map-zone">
+          <div class="zone-icon">🌲</div>
+          <div class="zone-name">Jungle Bawah</div>
+          <div class="zone-desc">Blue & Red Buff</div>
         </div>
         <div class="map-zone">
           <div class="zone-icon">⬇️</div>
           <div class="zone-name">Bot Lane</div>
-          <div class="zone-desc">Jalur bawah, untuk Marksman & Support</div>
+          <div class="zone-desc">Marksman / Support</div>
         </div>
         <div class="map-zone base-blue">
           <div class="zone-icon">🔵</div>
           <div class="zone-name">Base Biru</div>
           <div class="zone-desc">Markas tim kamu</div>
         </div>
-
       </div>
-
-      <!-- LEGENDA PETA -->
       <div class="map-legend">
-        <div class="legend-item">
-          <h4>🏰 Turret (Menara)</h4>
-          <p>Setiap lane punya 3 turret. Hancurkan untuk membuka jalan ke base musuh.</p>
-        </div>
-        <div class="legend-item">
-          <h4>🐢 Turtle</h4>
-          <p>Muncul tiap 2 menit di river. Bunuh untuk mendapat gold dan exp bonus tim.</p>
-        </div>
-        <div class="legend-item">
-          <h4>👹 Lord</h4>
-          <p>Muncul setelah 8 menit. Bunuh untuk mendapat minion raksasa yang menyerang base.</p>
-        </div>
-        <div class="legend-item">
-          <h4>🌲 Jungle</h4>
-          <p>Area hutan berisi monster untuk di-farm oleh Jungler demi mendapat gold & buff.</p>
-        </div>
-        <div class="legend-item">
-          <h4>💎 Blue Buff</h4>
-          <p>Mengurangi cooldown skill. Sangat berguna untuk Mage dan Jungler.</p>
-        </div>
-        <div class="legend-item">
-          <h4>🔴 Red Buff</h4>
-          <p>Menambah damage dan slow pada serangan. Cocok untuk Marksman dan Assassin.</p>
-        </div>
+        <div class="legend-item"><h4>🏰 Turret</h4><p>3 turret per lane, lindungi base dari serangan musuh.</p></div>
+        <div class="legend-item"><h4>🐢 Turtle</h4><p>Bunuh untuk gold & EXP bonus seluruh tim.</p></div>
+        <div class="legend-item"><h4>👹 Lord</h4><p>Bunuh untuk minion raksasa yang menyerang base musuh.</p></div>
+        <div class="legend-item"><h4>💎 Blue Buff</h4><p>Kurangi cooldown skill, ideal untuk Mage.</p></div>
+        <div class="legend-item"><h4>🔴 Red Buff</h4><p>Tambah damage & slow, ideal untuk Marksman.</p></div>
+        <div class="legend-item"><h4>🌿 Bush</h4><p>Semak untuk bersembunyi dan melakukan ambush.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- TIPS BERMAIN -->
-  <section class="tips" id="tips">
+  <!-- TIPS -->
+  <section class="section section-dark" id="tips">
     <h2 class="section-title">Tips Bermain</h2>
-    <ul>
+    <p class="section-sub">Terapkan tips ini untuk meningkatkan rank-mu</p>
+    <ul class="tips-list">
       <li>Pilih satu role dan kuasai dulu sebelum mencoba role lain.</li>
       <li>Selalu perhatikan minimap untuk mengetahui posisi musuh.</li>
       <li>Komunikasi dengan tim menggunakan quick chat.</li>
@@ -586,30 +581,24 @@
       <li>Farming gold secara konsisten lebih penting dari sekadar kill.</li>
       <li>Rebut Turtle di menit-menit awal untuk keunggulan gold tim.</li>
       <li>Koordinasi saat menyerang Lord agar tidak di-steal musuh.</li>
+      <li>Gunakan bush untuk bersembunyi dan melakukan gank mendadak.</li>
+      <li>Sesuaikan build item dengan hero musuh, bukan hanya pakai build default.</li>
     </ul>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Mobile Legends Info · Dibuat dengan ❤️ untuk para player MLBB</p>
+    <p>© 2026 <span>Mobile Legends Info</span> · Dibuat dengan ❤️ untuk para player MLBB</p>
   </footer>
 
   <script>
     function filterHero(role, btn) {
-      // Update active button
       document.querySelectorAll('.hero-filter button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // Filter cards
       document.querySelectorAll('.hero-card').forEach(card => {
-        if (role === 'all' || card.dataset.role === role) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = (role === 'all' || card.dataset.role === role) ? 'block' : 'none';
       });
     }
   </script>
-
 </body>
 </html>
